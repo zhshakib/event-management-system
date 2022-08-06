@@ -1,8 +1,21 @@
 <?php
 session_start();
-include_once "./config.php";
+require_once "./database.php";
 include "./layout/header.php";
 include "./layout/navbar.php";
+?>
+<?php
+
+if (!empty($_GET['message'])) {
+    $UserName = $_SESSION["user"];
+?>
+<div class="mt-2 container alert alert-primary alert-dismissible fade show" role="alert">
+  <strong>Welcome! <?php echo $UserName; ?></strong> You have Succesfully Logged in!
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>   
+<?php
+
+}
 ?>
 
 <div class="container">
