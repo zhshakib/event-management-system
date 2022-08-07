@@ -2,8 +2,19 @@
 require_once "./database.php";
 include "./layout/header.php";
 ?>
+
     <section class="vh-100 bg-dark text-white">
         <div class="container py-5 h-100">
+        <?php
+
+if (!empty($_GET['message'])) { ?>
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <strong>You have Succesfully Signed Up! || Now you can Login</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>   
+<?php
+}
+?>
             <div class="row d-flex align-items-center justify-content-center h-100">
                 <div class="col-md-8 col-lg-7 col-xl-6">
                     <img src="./assets/draw2.svg"
@@ -26,7 +37,7 @@ include "./layout/header.php";
                         <!-- Submit button -->
                         <div class="d-grid">
                             <button class="btn btn-outline-danger" type="submit">Login</button>
-                            <a href="website/register.php" class="btn btn-outline-warning mt-2" >Create New</a>
+                            <a href="./register.php" class="btn btn-outline-warning mt-2" >Create New</a>
                         </div>
                     </form>
                 </div>
@@ -34,13 +45,7 @@ include "./layout/header.php";
         </div>
     </section>
 
-<section class="bg-white">
-    <h2>Form data section!</h2>
-    
 <?php
-// TODO: Create Login Functionality
-
-
 if (isset($_POST) & !empty($_POST)) {
     $email = $_POST["email"];
     $password = $_POST['password'];
@@ -49,8 +54,9 @@ if (isset($_POST) & !empty($_POST)) {
         session_start();
         $_SESSION['loggedin'] = "true";
         $_SESSION['user'] = $user_name = $response["firstName"];
-        header("Location: ./index.php?message=success"); /* Redirect browser */
-        exit();
+        echo "<script type='text/javascript'>
+        window.location.replace('./index.php?message=success');
+        </script>";
     }
     else {
         echo "Email Password Didnt match! ";
@@ -59,9 +65,7 @@ if (isset($_POST) & !empty($_POST)) {
 
 }
 ?>
-
-</section>
-
     <?php
 include "./layout/footer.php";
 ?>
+

@@ -15,9 +15,9 @@ class Database
         $return = mysqli_real_escape_string($this->connection, $var);
         return $return;
     }
-    public function create($fname, $lname, $email, $gender, $age)
+    public function Create_User($email, $user_pass, $fname, $lname, $gender, $age, $role)
     {
-        $sql = "INSERT INTO `crud` (email, password, firstName, lastName, age, gender, user_role, date_created,) VALUES ('$fname', '$lname', '$email', '$gender', '$age')";
+        $sql = "INSERT INTO `users` (email, user_pass, firstName, lastName, age, gender, user_role) VALUES ('$email', '$user_pass', '$fname', '$lname', '$age', $gender, '$role')";
         $res = mysqli_query($this->connection, $sql);
         if ($res) {
             return true;
@@ -26,13 +26,6 @@ class Database
             return false;
         }
     }
-    public function read()
-    {
-        $sql = "SELECT * FROM `crud`";
-        $res = mysqli_query($this->connection, $sql);
-        return $res;
-    }
-
     public function Check_User($email, $password)
     {
         $sql = "SELECT `firstName` FROM `users` WHERE email='$email' AND user_pass='$password'";
