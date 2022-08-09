@@ -8,6 +8,13 @@ include "./layout/navbar.php";
 
 if (!empty($_GET['message'])) {
     $UserName = $_SESSION["user"];
+    if ($_GET['message'] === "signout") {
+        // remove all session variables
+        session_unset();
+
+        // destroy the session
+        session_destroy();
+    }
 ?>
 <div class="mt-2 container alert alert-primary alert-dismissible fade show" role="alert">
   <strong>Welcome! <?php echo $UserName; ?></strong> You have Succesfully Logged in!

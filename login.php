@@ -7,11 +7,16 @@ include "./layout/header.php";
         <div class="container py-5 h-100">
         <?php
 
-if (!empty($_GET['message'])) { ?>
+if (!empty($_GET['message'])) {
+    if ($_GET['message'] === "signout") {
+        // remove all session variables
+        session_unset();
+    }
+?>
 <div class="alert alert-primary alert-dismissible fade show" role="alert">
   <strong>You have Succesfully Signed Up! || Now you can Login</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>   
+</div>
 <?php
 }
 ?>
